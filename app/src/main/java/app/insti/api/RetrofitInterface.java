@@ -9,6 +9,7 @@ import app.insti.api.model.HostelMessMenu;
 import app.insti.api.model.NewsArticle;
 import app.insti.api.model.Notification;
 import app.insti.api.model.PlacementBlogPost;
+import app.insti.api.model.SearchDataPost;
 import app.insti.api.model.TrainingBlogPost;
 import app.insti.api.model.User;
 import app.insti.api.model.Venter;
@@ -17,6 +18,7 @@ import app.insti.api.request.CommentCreateRequest;
 import app.insti.api.request.ComplaintCreateRequest;
 import app.insti.api.request.EventCreateRequest;
 import app.insti.api.request.ImageUploadRequest;
+import app.insti.api.request.QuestionCreateRequest;
 import app.insti.api.request.UserFCMPatchRequest;
 import app.insti.api.request.UserShowContactPatchRequest;
 import app.insti.api.response.ComplaintCreateResponse;
@@ -25,6 +27,7 @@ import app.insti.api.response.ExploreResponse;
 import app.insti.api.response.ImageUploadResponse;
 import app.insti.api.response.LoginResponse;
 import app.insti.api.response.NewsFeedResponse;
+import app.insti.api.response.QuestionCreateResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -150,4 +153,10 @@ public interface RetrofitInterface {
 
     @GET("venter/tags")
     Call<List<Venter.TagUri>> getTags(@Header("Cookie") String sessionID);
+
+    @POST("search-faq/")
+    Call<QuestionCreateResponse> postQuestion(@Header("Cookie") String sessionId, @Body QuestionCreateRequest questionCreateRequest);
+
+    @GET("search-faq")
+    Call<List<SearchDataPost>> getSearchFeed(@Header("Cookie") String sessionID, @Query("from") int from, @Query("num") int num, @Query("query") String query);
 }
