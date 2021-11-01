@@ -41,7 +41,7 @@ import app.insti.interfaces.SearchDataInterface;
 import app.insti.utils.BodyHeadCard;
 import app.insti.utils.BodyHeadViewHolder;
 
-public class SearchAdapter extends SearchCardAdapter<SearchDataPost> {
+public class SearchAdapter extends SearchCardAdapter<SearchDataPost>  {
 
 
 //    public void onClick(Event event, final Fragment fragment, View view) {

@@ -2,9 +2,12 @@ package app.insti.fragment;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -13,6 +16,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import app.insti.Constants;
@@ -28,12 +33,12 @@ import app.insti.api.model.TrainingBlogPost;
 import retrofit2.Call;
 import app.insti.fragment.SearchRecyclerViewFragment;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class SearchFragment extends SearchRecyclerViewFragment<SearchDataPost, SearchAdapter> {
 
     private FloatingActionButton fab;
+
+    List<String> filter_tags = new ArrayList<>();
 
     public SearchFragment() {
         // Required empty public constructor
@@ -50,6 +55,8 @@ public class SearchFragment extends SearchRecyclerViewFragment<SearchDataPost, S
     @Override
     public void onStart() {
         super.onStart();
+
+
 
 
         Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
@@ -76,11 +83,10 @@ public class SearchFragment extends SearchRecyclerViewFragment<SearchDataPost, S
 
     @Override
     protected Call<List<SearchDataPost>> getCall(RetrofitInterface retrofitInterface, String sessionIDHeader, int postCount) {
-        return retrofitInterface.getSearchFeed(sessionIDHeader, postCount, 20, searchQuery);
+        return retrofitInterface.getSearchFeed(sessionIDHeader, postCount, 20, searchQuery, filter_tags);
     }
 
     private void initFab() {
-//        if (((MainActivity) getActivity()).createEventAccess()) {
             fab.show();
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -98,5 +104,34 @@ public class SearchFragment extends SearchRecyclerViewFragment<SearchDataPost, S
             });
 //        }
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+     if (item.getItemId() != R.id.action_search && item.getItemId() != R.id.action_filter) {
+        if (item.isChecked()) {
+            item.setChecked(false);
+            int idx = 0;
+            while (idx < filter_tags.size()) {
+                if (filter_tags.get(idx).equals(item.getTitle())) {
+                    // Remove item
+                    filter_tags.remove(idx);
+
+                } else {
+                    ++idx;
+                }
+            }
+        } else {
+            item.setChecked(true);
+            filter_tags.add((String) item.getTitle());
+
+
+        }
+
+    }
+    return true;
+
+
+}
+
 
 }

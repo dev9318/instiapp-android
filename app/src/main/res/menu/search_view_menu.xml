@@ -2,6 +2,31 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id= "@+id/action_filter"
+        android:icon="@drawable/ic_action_filter"
+        android:title="filter"
+        app:showAsAction="ifRoom"
+        android:checkableBehavior="single">
+        <menu>
+
+            <item android:id="@+id/smp"
+                android:title="smp"
+                android:checkable="true"/>
+            <item android:id="@+id/insti"
+                android:title="insti"
+                android:checkable="true"/>
+            <item android:id="@+id/smp3"
+                android:title="smp3"
+                android:checkable="true"/>
+            <item android:id="@+id/insti4"
+                android:title="insti"
+                android:checkable="true"/>
+        </menu>
+    </item>
+
+
     <item
         android:id="@+id/action_search"
         android:icon="@drawable/baseline_search_white_24"

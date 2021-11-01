@@ -158,5 +158,5 @@ public interface RetrofitInterface {
     Call<QuestionCreateResponse> postQuestion(@Header("Cookie") String sessionId, @Body QuestionCreateRequest questionCreateRequest);
 
     @GET("query")
-    Call<List<SearchDataPost>> getSearchFeed(@Header("Cookie") String sessionID, @Query("from") int from, @Query("num") int num, @Query("query") String query);
+    Call<List<SearchDataPost>> getSearchFeed(@Header("Cookie") String sessionID, @Query("from") int from, @Query("num") int num, @Query("query") String query, @Query("filter") List<String> filter);
 }
